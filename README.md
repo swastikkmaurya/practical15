@@ -24,6 +24,34 @@ pd.to_datetime(df['Joining_Date']): Converts string-based date representations i
 
 pd.get_dummies(df, columns=['Department']): Performs One-Hot Encoding by converting categorical variables into multiple binary (0 or 1) columns.
 
+Data Loading: Create a DataFrame with diverse data types (Numerical and Categorical).
+
+Normalization Workflow:
+
+Apply Min-Max to the Price column to compress values between 0 and 1.
+
+Apply Z-Score to the Units_Sold column to center the mean at 0.
+
+Apply Decimal Scaling to the Price column for simple magnitude reduction.
+
+Encoding Workflow:
+
+Use sklearn.preprocessing.LabelEncoder for binary/ordinal columns like Gender.
+
+Use pd.get_dummies() for nominal columns like Payment_Method.
+
+Enable drop_first=True in dummy encoding to reduce redundancy.
+
+Verification: Print the head of the DataFrame after each transformation to observe the mathematical shifts in values.
+
 Conclusion:
 
-Data Normalization and Data Type Conversion using Python were successfully performed.
+In this experiment, we mastered the transition from raw data to model-ready data.
+
+Key findings:
+
+Normalization is non-negotiable for distance-based algorithms; without it, the Price column would have overwhelmed the Discount column during calculation.
+
+Label Encoding is efficient but can accidentally imply a mathematical relationship (e.g., thinking City 4 is "greater" than City 1), which is why One-Hot Encoding is often safer for geographical data like City.
+
+We successfully handled potential errors in Z-score calculation by ensuring the denominator used the standard deviation of the specific column being scaled, rather than a different feature's max value.
